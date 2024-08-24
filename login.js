@@ -23,13 +23,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const resdate = await response.json();
         if (response.ok) {
           document.getElementById("loginForm").reset();
-          console.log(resdate);
+          localStorage.setItem("token", resdate.token);
           alert("login successful!");
+          window.location.href = "/chatapp.html";
         } else {
           document.getElementById("message").textContent = resdate.message;
           document.getElementById("message").style.color = "red";
         }
       } catch (error) {
+        console.log(error);
         document.getElementById("message").textContent =
           "An error occurred. Please try again.";
         document.getElementById("message").style.color = "red";
