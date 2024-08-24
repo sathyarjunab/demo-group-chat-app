@@ -9,10 +9,15 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://127.0.0.1:5501",
+    credentials: true,
+  })
+);
 
 app.use(singupRoutes);
-
+// { force: true }
 sequelize
   .sync()
   .then((result) => {

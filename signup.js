@@ -28,10 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
         if (response.ok) {
           document.getElementById("message").textContent =
             "Sign up successful!";
+          alert("Sign up successful!");
           document.getElementById("message").style.color = "green";
+          document.getElementById("signupForm").reset();
         } else {
           console.log(resdata);
           document.getElementById("message").textContent = resdata.message;
+          alert(resdata.message);
         }
       } catch (error) {
         console.log(error);

@@ -26,7 +26,7 @@ exports.signupPost = async (req, res) => {
         });
       });
     } else {
-      res.status(404).send((message = "user already exist"));
+      res.status(404).send({ message: "user already exist" });
     }
   } catch (err) {
     console.log(err);
