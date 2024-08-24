@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const resdate = await response.json();
         if (response.ok) {
           document.getElementById("loginForm").reset();
+          console.log(resdate);
           alert("login successful!");
         } else {
           document.getElementById("message").textContent = resdate.message;

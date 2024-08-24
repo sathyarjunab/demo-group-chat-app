@@ -3,6 +3,7 @@
     "DB_NAME": "chat-app",
     "DB_USERNAME": "root",
     "DB_PASSWORD": "Sathyarjun@123",
-    "DB_HOST": "localhost"
+    "DB_HOST": "localhost",
+    "TOKEN_SECRET": "a@dv#v$d%vd^d&vd*dv(dv)vd!dv@dv#$v%dv^dv&g*e(ge!hr@#4466)8d6f5f(f*f&f^f$#@vvvLJKJD$%^&*()!@)(*&^%$#@#$%^&*()"
   }
 }

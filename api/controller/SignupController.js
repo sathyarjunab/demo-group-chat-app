@@ -1,6 +1,7 @@
-const { where } = require("sequelize");
-const User = require("../model/UserModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const User = require("../model/UserModel");
 
 exports.signupPost = async (req, res) => {
   try {
@@ -47,7 +48,8 @@ exports.loginPost = async (req, res) => {
           throw new Error(err);
         }
         if (result) {
-          res.status(200).send(result);
+          const token = jwt.sign(user.id, process.env.TOKEN_SECRET);
+          res.status(200).send({ token: token });
         } else {
           res.status(404).send({ message: "User Is Not Authorized" });
         }
