@@ -26,7 +26,34 @@ exports.signupPost = async (req, res) => {
         });
       });
     } else {
-      res.status(404).send({ message: "user already exist" });
+      res.status(404).send({ message: "User Already Exist" });
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+exports.loginPost = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (user) {
+      bcrypt.compare(req.body.password, user.Password, (err, result) => {
+        if (err) {
+          throw new Error(err);
+        }
+        if (result) {
+          res.status(200).send(result);
+        } else {
+          res.status(404).send({ message: "User Is Not Authorized" });
+        }
+      });
+    } else {
+      res.status(404).send({ message: "User Not Found" });
     }
   } catch (err) {
     console.log(err);

@@ -20,12 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify(data),
         });
-
+        const resdate = await response.json();
         if (response.ok) {
           document.getElementById("loginForm").reset();
           alert("login successful!");
         } else {
-          document.getElementById("message").textContent = response.message;
+          document.getElementById("message").textContent = resdate.message;
           document.getElementById("message").style.color = "red";
         }
       } catch (error) {
@@ -34,8 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("message").style.color = "red";
       }
     });
+
   document
-    .getElementsByClassName("forgotpassbtn")
+    .querySelector(".forgotpassbtn")
     .addEventListener("click", async () => {
       const response = await fetch("http://localhost:3000/forgotPassword");
     });
