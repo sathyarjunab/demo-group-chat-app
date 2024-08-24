@@ -3,7 +3,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const sequelize = require("./util/DataBase");
+const User = require("./model/UserModel");
+const Message = require("./model/message");
 const singupRoutes = require("./routes/SignupRoute");
+const chatAppRoutes = require("./routes/ChatAppRoutes");
 
 const app = express();
 
@@ -17,6 +20,11 @@ app.use(
 );
 
 app.use(singupRoutes);
+app.use(chatAppRoutes);
+
+User.hasMany(Message);
+Message.belongsTo(User);
+
 // { force: true }
 sequelize
   .sync()

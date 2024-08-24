@@ -5,6 +5,9 @@ const User = require("../model/UserModel");
 
 exports.signupPost = async (req, res) => {
   try {
+    if (req.body.phone.length > 10) {
+      return res.status(400).send({ message: "Invalid Phone Number" });
+    }
     const existingUser = await User.findOne({
       where: { Email: req.body.email },
     });

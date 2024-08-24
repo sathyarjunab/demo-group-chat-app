@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   const messageForm = document.getElementById("messageForm");
   const messageInput = document.getElementById("messageInput");
 
+  const token = localStorage.getItem("token");
   // Function to fetch users
   async function fetchUsers() {
     try {
-      const response = await fetch("http://localhost:3000/api/users");
+      const response = await fetch("http://localhost:3000/users");
       const users = await response.json();
-
       users.forEach((user) => {
         const li = document.createElement("li");
         li.textContent = user.Name;
@@ -23,14 +23,20 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Function to fetch messages
   async function fetchMessages() {
     try {
-      const response = await fetch("http://localhost:3000/api/messages");
+      const response = await fetch("http://localhost:3000/messages", {
+        headers: { authorization: token },
+      });
       const messages = await response.json();
-
+      console.log(messages);
       messages.forEach((message) => {
         const div = document.createElement("div");
         div.classList.add("message");
-        div.classList.add(message.user === "sat" ? "user" : "other");
-        div.textContent = `${message.user}: ${message.text}`;
+        div.classList.add(
+          message.User.name === "sathyarjun ab" ? "user" : "other"
+        );
+        div.textContent = `${
+          message.User.name === "sathyarjun ab" ? "you" : message.User.name
+        }: ${message.Message}`;
         messagesContainer.appendChild(div);
       });
     } catch (error) {
@@ -41,13 +47,14 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Function to send a new message
   async function sendMessage(message) {
     try {
-      const response = await fetch("http://localhost:3000/api/messages", {
+      const response = await fetch("http://localhost:3000/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: token,
         },
         body: JSON.stringify({
-          user: "sat", // Replace with the actual username
+          user: "sathyarjun ab", // Replace with the actual username
           text: message,
         }),
       });
@@ -62,11 +69,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Fetch users and messages when the page loads
   await fetchUsers();
   await fetchMessages();
-
   // Handle message sending
   messageForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-
     const message = messageInput.value.trim();
     if (message) {
       // Append the message to the chat
