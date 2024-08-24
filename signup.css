@@ -34,3 +34,8 @@ button:hover {
   text-align: center;
   margin-top: 20px;
 }
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px; /* Optional: Adds some space below the heading */
+}

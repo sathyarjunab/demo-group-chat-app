@@ -24,16 +24,17 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           body: JSON.stringify(data),
         });
-
+        const resdata = await response.json();
         if (response.ok) {
           document.getElementById("message").textContent =
             "Sign up successful!";
           document.getElementById("message").style.color = "green";
         } else {
-          document.getElementById("message").textContent =
-            "Sign up failed. Please try again.";
+          console.log(resdata);
+          document.getElementById("message").textContent = resdata.message;
         }
       } catch (error) {
+        console.log(error);
         document.getElementById("message").textContent =
           "An error occurred. Please try again.";
       }
