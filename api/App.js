@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const sequelize = require("./util/DataBase");
 const User = require("./model/UserModel");
 const Message = require("./model/message");
+const Group = require("./model/Groups");
 const singupRoutes = require("./routes/SignupRoute");
 const chatAppRoutes = require("./routes/ChatAppRoutes");
 
@@ -22,6 +23,12 @@ app.use(
 app.use(singupRoutes);
 app.use(chatAppRoutes);
 
+Group.hasMany(Message);
+Message.belongsTo(Group, { constraints: true, onDelete: "CASCADE" });
+
+User.belongsToMany(Group, { through: "GroupMember" });
+Group.belongsToMany(User, { through: "GroupMember" });
+
 User.hasMany(Message);
 Message.belongsTo(User);
 
@@ -29,11 +36,10 @@ Message.belongsTo(User);
 sequelize
   .sync()
   .then((result) => {
-    app.listen(3000, () => {
+    app.listen(3001, () => {
       console.log("connected");
     });
   })
   .catch((err) => {
     console.log(err);
-    resizeBy.status(500).send(err);
   });

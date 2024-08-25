@@ -3,29 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Group Chat</title>
+    <title>Chat Application</title>
     <link rel="stylesheet" href="./chatapp.css" />
   </head>
   <body>
     <div class="chat-container">
-      <aside class="users-list">
-        <h3>Users</h3>
-        <ul id="users"></ul>
-      </aside>
-      <section class="chat-section">
-        <div class="chat-messages" id="messages"></div>
+      <div class="groups">
+        <h2>Groups</h2>
+        <ul id="groupList"></ul>
+        <button id="createGroupBtn">Create Group</button>
+      </div>
+      <div class="users">
+        <h2>Users</h2>
+        <ul id="userList"></ul>
+      </div>
+      <div class="messages">
+        <h2 id="currentGroup">Select a Group</h2>
+        <div id="messagesContainer"></div>
         <form id="messageForm">
           <input
             type="text"
             id="messageInput"
-            placeholder="Type a message..."
+            placeholder="Type a message"
             required
           />
           <button type="submit">Send</button>
         </form>
-      </section>
+      </div>
     </div>
-
     <script src="./chatapp.js"></script>
   </body>
 </html>

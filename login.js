@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
 
       try {
-        const response = await fetch("http://localhost:3000/login", {
+        const response = await fetch("http://localhost:3001/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (response.ok) {
           document.getElementById("loginForm").reset();
           localStorage.setItem("token", resdate.token);
+          localStorage.setItem("user", resdate.user);
           alert("login successful!");
           window.location.href = "/chatapp.html";
         } else {
@@ -41,6 +42,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector(".forgotpassbtn")
     .addEventListener("click", async () => {
-      const response = await fetch("http://localhost:3000/forgotPassword");
+      const response = await fetch("http://localhost:3001/forgotPassword");
     });
 });

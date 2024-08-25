@@ -4,6 +4,8 @@ const User = require("../model/UserModel");
 
 exports.authorized = (req, res, next) => {
   try {
+    console.log(req.url);
+    console.log(req.params.uuid);
     const userToken = req.headers["authorization"];
     jwt.verify(userToken, process.env.TOKEN_SECRET, async (err, userId) => {
       if (err) {
@@ -16,5 +18,6 @@ exports.authorized = (req, res, next) => {
     });
   } catch (err) {
     console.log(err);
+    res.status(500).send(err);
   }
 };

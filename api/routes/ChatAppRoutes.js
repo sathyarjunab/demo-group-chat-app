@@ -5,10 +5,14 @@ const auth = require("../middleware/auth");
 
 const routes = express.Router();
 
-routes.get("/users", controller.getUser);
+routes.get("/groups", auth.authorized, controller.getGroups);
 
-routes.post("/messages", auth.authorized, controller.postMessage);
+routes.get("/groups/:uuid/messages", auth.authorized, controller.getMessages);
 
-routes.get("/messages", auth.authorized, controller.getMessage);
+routes.post("/groups/:uuid/messages", auth.authorized, controller.addMessage);
+
+routes.post("/groups", auth.authorized, controller.createGroupWithMembers);
+
+routes.get("/groups/:uuid/users", auth.authorized, controller.getUsers);
 
 module.exports = routes;
