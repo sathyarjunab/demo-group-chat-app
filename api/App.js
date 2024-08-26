@@ -26,11 +26,14 @@ app.use(chatAppRoutes);
 Group.hasMany(Message);
 Message.belongsTo(Group, { constraints: true, onDelete: "CASCADE" });
 
-User.belongsToMany(Group, { through: "GroupMember" });
-Group.belongsToMany(User, { through: "GroupMember" });
+User.belongsToMany(Group, { through: "GroupMember", as: "MemberGroups" });
+Group.belongsToMany(User, { through: "GroupMember", as: "Members" });
 
 User.hasMany(Message);
 Message.belongsTo(User);
+
+User.belongsToMany(Group, { through: "GroupAdmin", as: "AdminGroups" });
+Group.belongsToMany(User, { through: "GroupAdmin", as: "GroupAdmins" });
 
 // { force: true }
 sequelize

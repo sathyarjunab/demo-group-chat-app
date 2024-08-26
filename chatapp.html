@@ -16,6 +16,7 @@
       <div class="users">
         <h2>Users</h2>
         <ul id="userList"></ul>
+        <button style="display: none" id="addUserBtn">Add User</button>
       </div>
       <div class="messages">
         <h2 id="currentGroup">Select a Group</h2>
@@ -31,6 +32,21 @@
         </form>
       </div>
     </div>
+
+    <!-- Modal for Adding Users -->
+    <div id="addUserModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add User</h2>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by name or phone number"
+        />
+        <ul id="searchResults"></ul>
+      </div>
+    </div>
+
     <script src="./chatapp.js"></script>
   </body>
 </html>
